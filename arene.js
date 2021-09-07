@@ -62,13 +62,13 @@ class classArene
         btnQuit.set("Quit", function(){jeu.quit();});
         
         setTimeout('document.getElementById("arene").style.height = "0px";',1000);
-        setTimeout('document.getElementById("logo").style.top = "0px";',1000);
-        setTimeout('document.getElementById("arene").style.top = "240px";',1000);
-        setTimeout('document.getElementById("arene").style.width = "0px";',3000);
-        setTimeout('document.getElementById("arene").style.display = "none"',5000);
+        setTimeout('document.getElementById("logo").style.top = "0px";',3000);
+        setTimeout('document.getElementById("arene").style.top = "240px";',3000);
+        setTimeout('document.getElementById("arene").style.width = "0px";',4000);
+        setTimeout('document.getElementById("arene").remove()',6000);
 
-        setTimeout('btnStart.enable();',5000);
-        setTimeout('btnQuit.enable();',5000);
+        setTimeout('btnStart.enable();',6000);
+        setTimeout('btnQuit.enable();',6000);
         
     }
 }

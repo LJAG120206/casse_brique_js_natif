@@ -30,12 +30,27 @@ body
     width: 0px;
     height: 0px;
     box-sizing: content-box;
-    background: url(bg01.jpg);
+    /*background: url(bg01.jpg);*/
     overflow: hidden;
     border: 1px solid red;
     box-shadow: 5px 5px 15px #333333 inset;
     transition: all 2s ease;
     display: none;
+}
+
+#vies
+{
+    position: absolute;
+    left: 2.5%;
+    top: 95%;
+    width: 50%;
+    text-align: left;
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: black 0px 5px 20px, black 0px 0px 5px;
+    z-index: 10;
 }
 
 #msg
@@ -50,6 +65,7 @@ body
     font-size: 128px;
     font-weight: bold;
     text-shadow: black 0px 5px 20px, black 0px 0px 5px;
+    z-index: 10;
 }
 
 #boutons
@@ -125,6 +141,11 @@ body
 .b7
 {
     background: linear-gradient(135deg, #00ff00, #555555);
+}
+
+.b8
+{
+    background: linear-gradient(135deg, #000000, #555555);
 }
 
 .balle

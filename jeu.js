@@ -16,6 +16,8 @@ class classJeu
 
         this.demoMode   = true;
 
+        this.getReady   = false;
+
     }
 
     start()
@@ -32,10 +34,14 @@ class classJeu
         this.arene.mur.createWall();
         this.arene.batte.createElement();
         this.arene.balles[0].createElement();
-        //this.arene.balles[1].createElement();
-        //this.arene.balles[2].createElement();
+
+        let life = document.createElement("div");
+        life.id  = "vies";
+        life.innerHTML = "Vies : "+this.vies;
+        document.getElementById("arene").appendChild(life); 
 
         this.demoStart();
+        
     }
 
     quit()
@@ -46,72 +52,73 @@ class classJeu
     newGame()
     {
         console.log("newGame()");
+
         this.demoMode = false;
         clearInterval(jeu.arene.batte.run);
-        jeu.arene.batte.startListenMouse();
-        //clearInterval(jeu.arene.balles[0].run);
-        //jeu.arene.balles[0].x = jeu.arene.batte.x1;
-        //jeu.arene.balles[0].startListenMouse();
         
-    
-        /*for(let i = 1; i < 1; i++)
+        this.arene.mur.resetWall();
+        //suppression des balles (anticipé Max de 3)
+        for(let i=0; i <= 3; i++)
         {
-            setTimeout("jeu.arene.balles["+i+"].go()", i*3000);
-            console.log("setTimeout('jeu.arene.balles["+i+"].go()', i*3000);");
-        }*/
-        jeu.countDown();
-        
+            let el = document.getElementById("balle"+i);
+            if(el)
+            {
+                console.log(i);
+                this.arene.balles[i].reset(i);
 
+                this.arene.balles[i] = new classBalle(i);
+                this.arene.balles[i].createElement();
+
+            }
+        }
+        this.countDown();
     }
 
     demoStart()
     {
-     
-        this.arene.balles[0].go(); 
+        this.demoMode = true;
+        setTimeout("jeu.arene.balles[0].go()", 5000);
         this.arene.batte.go();
-        
     }
 
     countDown()
     {
+        this.getReady = true;
+
         let cd = document.createElement("div");
         cd.id = "msg";
-        //cd.className = "msg";
-        cd.style.position = "relative";
-        cd.style.left = "100px";
-        cd.style.top = "200px";
         document.getElementById("arene").appendChild(cd);
-
-        
-        var affiche = "dcpt";
          
-        for ( let dcpt = 3; dcpt >= 0; dcpt--)
-        {
-            
-            affiche = dcpt;
-            /*if(dcpt >= 0)
-            {
-                
-            }
-            
-            else
-            {
-                //var affiche = 'Redirection dans '+dcpt+' seconde';
-            }*/
-        }
+        let dcpt = 3;
 
-        document.getElementById('msg').innerHTML = affiche;
+        document.getElementById("msg").innerHTML = dcpt;
+
+        setTimeout("document.getElementById('msg').innerHTML = "+dcpt--, 500);
+        setTimeout("document.getElementById('msg').innerHTML = "+dcpt--, 1000);
+        setTimeout("document.getElementById('msg').innerHTML = "+dcpt--, 1500);
+        setTimeout("document.getElementById('msg').innerHTML = 'Jo!'", 2000);
+        setTimeout("document.getElementById('msg').innerHTML = ''", 4000);
         
+        this.arene.batte.startListenMouse();
+        document.getElementById("arene").addEventListener
+        ("click", function () 
+            {
+                jeu.getReady = false;
 
-        // for(let i = 3; i>=0; i--)
-        // {
-        //     setTimeout('document.getElementById("msg").innerHTML = cd;', i*1000);
-            
-        //     if(i = 0)
-        //     {
-        //        document.getElementById("arene").removeChild(cd); 
-        //     }
-        // }
+                jeu.arene.balles[0].go();
+            }
+        );
     }
 
+    gameOver()
+    {
+        console.log("jeu.gameOver();");
+        this.getReady = false;
+        this.niveau = 0;
+        this.arene.mur.resetWall(0)
+        
+        this.demoStart();
+        console.log("jeu.getReady : "+this.getReady);
+        console.log("jeu.demoMode : "+this.demoMode);
+    }
 }

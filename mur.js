@@ -5,6 +5,7 @@
 class classMur
 {
     briques;
+    total;
     constructor()
     {
         this.name = "mur";
@@ -16,6 +17,9 @@ class classMur
 
     loadLevel(niveau)
     {
+        this.total = 0;
+        this.level = "";
+        console.log("test niveau dans loadLevel : "+niveau)
         let xhr = new XMLHttpRequest();
         xhr.open("get", "level" + niveau + ".txt", false);
         xhr.send(null);
@@ -24,11 +28,19 @@ class classMur
         for (let m = 0; m < map.length; m++)
         {
             var c = map.substring(m, m+1);
-            if (c == "_" || (c >= "0" && c <= "7"))
+            if (c == "_" || (c >= "0" && c <= "8"))
             {
                 this.level += c;
+                
+            }
+            if(c >= "0" && c <= "8")
+            {
+                this.total++;
+                
             }
         }
+        console.log("jeu.arene.mur.total = "+this.total);
+        console.log(this.level);
     }
 
     createWall()
@@ -49,6 +61,22 @@ class classMur
 
     resetWall()
     {
-        
+
+        console.log("test resetWall");
+        for (let m = 0; m < 234; m++)
+        {
+            this.briques[m]    = "";
+            let el = document.getElementById("brique"+m);
+
+            if(el)
+            {
+                el.remove();
+            }
+        }
+        console.log("Dans mur jeu.niveau après++ : "+jeu.niveau);
+
+        this.loadLevel(jeu.niveau);
+
+        this.createWall();
     }
 }

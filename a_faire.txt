@@ -1,0 +1,3 @@
+resetWall lorsque jeu.vies = 0 lorsque balle passe sous la batte
+
+faire que balle suive la batte

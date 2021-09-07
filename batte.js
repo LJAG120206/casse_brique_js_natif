@@ -42,7 +42,15 @@ class classBatte
         document.onmousemove = function (e) {
             let bcr =parseInt(document.getElementById("arene").getBoundingClientRect().left);
             jeu.arene.batte.x1 = e.clientX - bcr - 40;
+            /*
+            console.log(jeu.getReady);
+            if (jeu.getReady == true)
+            {
+                jeu.arene.balles[0].x = e.clientX - bcr - 7;
+            }
+            */
             jeu.arene.batte.move();
+            
         };
     }
 
@@ -61,10 +69,15 @@ class classBatte
         {
             //console.log("jeu.arene.batte.demoMode");
             this.x1 = jeu.arene.balles[0].x - 40;
-            //console.log("balle.x: " + jeu.arene.balles[0].x);
-            //console.log("batte.x = " + this.x1);
         }            
             
+        if(jeu.getReady)
+        {
+            //console.log("batte.move() valeur x1 : "+this.x1);
+            
+            jeu.arene.balles[0].moveTo(this.x1,this.y-7);
+        }
+
         if (this.x1 < 0)
         {
             this.x1 = 0;
